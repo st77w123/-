@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MAIL_DAEMON v3.0</title>
+<title>ST MAIL v3.0</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap');
@@ -106,7 +106,7 @@ textarea{resize:vertical;min-height:80px;}
 <!-- ── CONSENT SCREEN ── -->
 <div id="consentScreen">
   <div class="consent-box">
-    <div class="consent-title">⬛ MAIL_DAEMON</div>
+    <div class="consent-title">⬛ ST MAIL</div>
     <div class="consent-sub">TERMS OF ACCESS // READ CAREFULLY BEFORE PROCEEDING</div>
     <div class="consent-body">
       <p>By accessing this system, you acknowledge and agree to the following:</p>
@@ -130,7 +130,7 @@ textarea{resize:vertical;min-height:80px;}
 <!-- ── AUTH SCREEN ── -->
 <div id="authScreen" style="display:none;align-items:center;justify-content:center;">
   <div class="auth-box">
-    <div class="auth-title">⬛ MAIL_DAEMON</div>
+    <div class="auth-title">⬛ ST MAIL</div>
     <div class="auth-sub">AUTHENTICATION REQUIRED // IDENTIFY YOURSELF</div>
     <div class="auth-tabs">
       <button class="auth-tab on" id="at-login" onclick="switchAuth('login')">LOGIN</button>
@@ -149,7 +149,7 @@ textarea{resize:vertical;min-height:80px;}
 <!-- ── MAIN APP ── -->
 <div id="app">
   <header class="hdr">
-    <div><div class="hdr-logo">⬛ MAIL_DAEMON</div><div class="hdr-sub">BULK MAIL SYSTEM v3.0 // RESEND API</div></div>
+    <div><div class="hdr-logo">⬛ ST MAIL</div><div class="hdr-sub">BULK MAIL SYSTEM v3.0 // RESEND API</div></div>
     <div class="hdr-right">
       <span class="user-badge" id="userBadge">USER: —</span>
       <button class="logout-btn" onclick="doLogout()">LOGOUT</button>
@@ -211,7 +211,7 @@ textarea{resize:vertical;min-height:80px;}
         </div>
       </div>
       <div class="term-body" id="tb">
-        <span class="L sys">&gt; MAIL_DAEMON v3.0 — SYSTEM INIT</span>
+        <span class="L sys">&gt; ST MAIL v3.0 — SYSTEM INIT</span>
         <span class="L dim">&gt; Authenticated session active.</span>
         <span class="L dim">&gt; Configure and press EXECUTE_SEND.</span>
         <span class="L dim">&gt; <span class="cur"></span></span>
@@ -340,7 +340,7 @@ async function startSend(){
   isSending=true;
   const btn=document.getElementById('sendBtn');btn.disabled=true;btn.textContent='⏳ TRANSMITTING...';
   removeCursor();
-  tlog('&gt; INITIALIZING MAIL_DAEMON v3.0','sys');
+  tlog('&gt; INITIALIZING ST MAIL v3.0','sys');
   tlog('&gt; CONNECTING TO RESEND API...','sys');
   tlog(`&gt; TARGET COUNT: ${recipients.length} RECIPIENTS`,'dim');
   tlog('&gt; ──────────────────────────────────────────────','dim');
@@ -356,7 +356,7 @@ async function startSend(){
       updProg(r.idx,recipients.length);
     });
     tlog('&gt; ──────────────────────────────────────────────','dim');
-    tlog('&gt; MAIL_DAEMON COMPLETE ✓','done');
+    tlog('&gt; ST MAIL COMPLETE ✓','done');
     tlog(`&gt; SENT: ${data.sent} | FAILED: ${data.failed} | TOTAL: ${data.total}`,'done');
     tlog('&gt; SYSTEM READY FOR NEW REQUEST','sys');
     tlog('&gt; <span class="cur"></span>','dim');
