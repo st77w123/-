@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.post('/api/send', async (req, res) => {
   const { apiKey, from, fromName, subject, body, recipients, delayMs } = req.body;
@@ -19,7 +19,7 @@ app.post('/api/send', async (req, res) => {
 
   const resend    = new Resend(apiKey);
   const delay     = ms => new Promise(r => setTimeout(r, ms));
-  const fromField = fromName ? `${fromName} <${from}>` : from;
+  const fromField = fromName ? ${fromName} <${from}> : from;
   let sent = 0, failed = 0;
   const results = [];
 
@@ -45,4 +45,4 @@ app.post('/api/send', async (req, res) => {
   res.json({ sent, failed, total: recipients.length, results });
 });
 
-app.listen(PORT, () => console.log(`[MAIL_DAEMON] Running → http://localhost:${PORT}`));
+app.listen(PORT, () => console.log([MAIL_DAEMON] Running → http://localhost:${PORT}));
