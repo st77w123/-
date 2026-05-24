@@ -19,7 +19,7 @@ app.post('/api/send', async (req, res) => {
 
   const resend    = new Resend(apiKey);
   const delay     = ms => new Promise(r => setTimeout(r, ms));
-  const fromField = fromName ? ${fromName} <${from}> : from;
+  const fromField = fromName ? `${fromName} <${from}>` : from;
   let sent = 0, failed = 0;
   const results = [];
 
@@ -45,4 +45,4 @@ app.post('/api/send', async (req, res) => {
   res.json({ sent, failed, total: recipients.length, results });
 });
 
-app.listen(PORT, () => console.log([MAIL_DAEMON] Running → http://localhost:${PORT}));
+app.listen(PORT, () => console.log(`[MAIL_DAEMON] Running → http://localhost:${PORT}`));
