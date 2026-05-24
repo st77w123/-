@@ -5,27 +5,9 @@ const path    = require('path');
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
-const PASSWORD = 'st77w123';
 
 app.use(cors());
 app.use(express.json());
-
-// Basic認証
-app.use((req, res, next) => {
-  const auth = req.headers['authorization'];
-  if (!auth) {
-    res.setHeader('WWW-Authenticate', 'Basic realm="MAIL_DAEMON"');
-    return res.status(401).send('認証が必要です');
-  }
-  const [,b64] = auth.split(' ');
-  const [,pass] = Buffer.from(b64,'base64').toString().split(':');
-  if (pass !== PASSWORD) {
-    res.setHeader('WWW-Authenticate', 'Basic realm="MAIL_DAEMON"');
-    return res.status(401).send('パスワードが違います');
-  }
-  next();
-});
-
 app.use(express.static(path.join(__dirname)));
 
 app.post('/api/send', async (req, res) => {
