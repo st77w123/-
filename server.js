@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname)));
 
 app.post('/api/send', async (req, res) => {
   const { apiKey, from, fromName, subject, body, recipients, delayMs } = req.body;
