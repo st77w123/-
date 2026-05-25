@@ -208,6 +208,12 @@ textarea{resize:vertical;min-height:80px;}
           <input id="delayMs" type="number" value="1000" min="500" max="30000">
           <span class="dlbl">ms / mail (recommended: 1000ms+)</span>
         </div>
+        <label>REPEAT COUNT（送信回数）</label>
+        <div class="drow">
+          <input id="repeatCount" type="number" value="1" min="1" max="100">
+          <span class="dlbl">times per recipient</span>
+        </div>
+        </div>
       </div>
       <button class="btn" id="sendBtn" onclick="startSend()">▶ EXECUTE_SEND</button>
     </div>
@@ -342,6 +348,7 @@ async function startSend(){
   const subject=document.getElementById('subject').value.trim();
   const body=document.getElementById('body').value.trim();
   const delayMs=parseInt(document.getElementById('delayMs').value)||1000;
+  const repeatCount=parseInt(document.getElementById('repeatCount').value)||1;
   if(!apiKey){errLog('API Key required.');return;}
   if(!from){errLog('From email required.');return;}
   if(!recipients.length){errLog('No recipients loaded.');return;}
@@ -351,11 +358,11 @@ async function startSend(){
   removeCursor();
   tlog('&gt; INITIALIZING ST MAIL v3.0','sys');
   tlog('&gt; CONNECTING TO RESEND API...','sys');
-  tlog(`&gt; TARGET COUNT: ${recipients.length} RECIPIENTS`,'dim');
+  tlog(`&gt; TARGET COUNT: ${recipients.length} RECIPIENTS × ${repeatCount} TIMES = ${recipients.length*repeatCount} TOTAL`,'dim');
   tlog('&gt; ──────────────────────────────────────────────','dim');
   showProg(0,recipients.length);scrollTerm();
   try{
-    const res=await fetch('/api/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({apiKey,from,fromName,subject,body,recipients,delayMs})});
+    const res=await fetch('/api/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({apiKey,from,fromName,subject,body,recipients,delayMs,repeatCount})});
     const data=await res.json();
     if(data.error){errLog(data.error);isSending=false;btn.disabled=false;btn.textContent='▶ EXECUTE_SEND';hideProg();return;}
     data.results.forEach(r=>{
